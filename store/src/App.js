@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react'
+import React, {useRef, useState, useContext, createContext} from 'react'
 import './styles/app.css';
 
 import {
@@ -21,14 +21,16 @@ import Combine from './reducers/Combine'
 function App() {
   const input = useRef()
  let history = useHistory()
- 
+
  const persistedState = localStorage.getItem('reduxState') 
                        ? JSON.parse(localStorage.getItem('reduxState'))
                        : []
  const store = createStore(Combine, persistedState)
  const [all, setAll] = useState(store.getState())
+
  store.subscribe(()=>{
   localStorage.setItem('reduxState', JSON.stringify(store.getState()))
+
   setAll(store.getState())
 })
 
@@ -44,8 +46,9 @@ function App() {
   }
 
   return (
+   
 <Provider store = {store}>
-
+    
    <Navi input = {input} handleSub = {handleSub} all = {all}/>
    
       <Switch>
@@ -56,6 +59,7 @@ function App() {
    
 
     </Provider>
+  
   );
 }
 

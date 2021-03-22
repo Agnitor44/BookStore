@@ -2,7 +2,10 @@ import React, {useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import { NavLink } from 'react-router-dom'
 import {cartAdd} from '../actions/CartAction'
+import {useCan} from '../App'
+
 export default function Modal({modal, setModal}) {
+
 const dispatch = useDispatch()
 const log = useSelector(state => state.cart)
 const [many, setMany] = useState(1)
@@ -22,7 +25,7 @@ const subAdd = (what) => {
   
 }
  const popUp = () => {
-   
+  
     setPop(true)
     setTimeout(() => {
         setPop(false)
@@ -32,6 +35,7 @@ const subAdd = (what) => {
 const handleBuy = () => {
 
 if(pop) return
+
 const obj = {
   
    id: Math.random(),
@@ -40,8 +44,12 @@ const obj = {
    
 
 }
-dispatch(cartAdd(obj))
+
+
 popUp()
+dispatch(cartAdd(obj))
+
+
 
 }
 
@@ -49,7 +57,10 @@ popUp()
 
     return (
         <>
+        
+            
          {pop&& <div className = 'pop'><h1>Produkt został dodany</h1><NavLink to ='/cart'>Koszyk</NavLink></div>}
+        
         <div class="modal">
           
         <div class="infoBox">

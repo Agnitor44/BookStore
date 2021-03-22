@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import {
+    NavLink,
    useParams
   } from "react-router-dom";
   import Modal from './Modal'
@@ -18,16 +19,19 @@ export default function Search() {
     const [go, setGo] = useState(false)
     const [modal, setModal] = useState(null)
     const [error, setError] = useState(false)
-  
+   const [buy, setBuy] = useState(false)
+   
     useEffect(async() => {
+       
         setGo(false)
+     
        await fetch(`https://www.googleapis.com/books/v1/volumes?q=${lu.code}&orderBy=newest`).then(data => data.json()).then(res => {
        
         setHomeList(res)
          } )
         
          setGo(true)
-         
+       
         
     }, [lu])
    
@@ -44,7 +48,24 @@ export default function Search() {
         {modal && 
           <Modal modal = {modal} setModal = {setModal}/>
         }
-        </> : <div className = 'allSpn'><div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div>
+        </>
+         :
+        <>
+        {modal ? 
+        <>
+        <Modal  modal = {modal} setModal = {setModal}/>
+       <div className = 'pop'><h1>Produkt został dodany</h1><NavLink to = '/cart'>Koszyk</NavLink></div>
+        </>
+        
+        : 
+        <>
     
+        <div className = 'allSpn'><div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div>
+        </>
+        }
+       
+          
+        
+        </>
     )
 }
