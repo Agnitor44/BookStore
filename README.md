@@ -36,3 +36,5 @@ All price will add up in navigation component.
 
 ![alt text](https://cdn.discordapp.com/attachments/630797359252504643/823593913230819378/unknown.png)
 
+
+Deploy - https://projectbookstoreagnitor.netlify.app/
